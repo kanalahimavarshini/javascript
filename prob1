@@ -54,3 +54,14 @@ let nums = [10, 5, 20, 8, 15];
 nums.sort((a,b) => b-a);
 
 console.log(nums[1]);
+function debounce(func, delay) {
+    let timer;
+
+    return function (...args) {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
