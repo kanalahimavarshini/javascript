@@ -65,3 +65,15 @@ function debounce(func, delay) {
         }, delay);
     };
 }
+function throttle(func, limit) {
+    let waiting = false;
+
+    return function (...args) {
+        if (!waiting) {
+            func.apply(this, args);
+            waiting = true;
+
+            setTimeout(() => waiting = false, limit);
+        }
+    };
+}
