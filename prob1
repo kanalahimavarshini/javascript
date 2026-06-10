@@ -256,3 +256,26 @@ function frequency(arr) {
 }
 
 console.log(frequency([1,2,2,3,3,3]));
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+
+    enqueue(element) {
+        this.items.push(element);
+    }
+
+    dequeue() {
+        return this.items.shift();
+    }
+
+    front() {
+        return this.items[0];
+    }
+}
+
+const q = new Queue();
+q.enqueue(10);
+q.enqueue(20);
+
+console.log(q.dequeue());
