@@ -431,3 +431,28 @@ const trie = new Trie();
 trie.insert("apple");
 
 console.log(trie.search("apple"));
+class AsyncQueue {
+    constructor() {
+        this.queue = [];
+    }
+
+    enqueue(item) {
+        this.queue.push(item);
+    }
+
+    async dequeue() {
+        while (this.queue.length === 0) {
+            await new Promise(resolve =>
+                setTimeout(resolve, 100)
+            );
+        }
+
+        return this.queue.shift();
+    }
+}
+
+const queue = new AsyncQueue();
+
+queue.enqueue("Task1");
+
+queue.dequeue().then(console.log);
