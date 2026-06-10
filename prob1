@@ -100,3 +100,15 @@ Array.prototype.myMap = function(callback) {
 };
 
 console.log([1,2,3].myMap(x => x * 2));
+let promise = new Promise((resolve, reject) => {
+    let success = true;
+
+    if (success)
+        resolve("Success");
+    else
+        reject("Failed");
+});
+
+promise
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
