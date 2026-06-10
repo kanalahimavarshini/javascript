@@ -77,3 +77,15 @@ function throttle(func, limit) {
         }
     };
 }
+function deepClone(obj) {
+    return structuredClone(obj);
+}
+
+let obj = {
+    name: "JS",
+    details: { version: "ES6" }
+};
+
+let copy = deepClone(obj);
+
+console.log(copy);
