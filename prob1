@@ -127,3 +127,17 @@ promise
 }
 
 getUsers();
+function memoize(fn) {
+    let cache = {};
+
+    return function(n) {
+        if (cache[n])
+            return cache[n];
+
+        return cache[n] = fn(n);
+    };
+}
+
+const square = memoize(n => n * n);
+
+console.log(square(5));
