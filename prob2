@@ -465,3 +465,17 @@ function add(a, b, c) {
 }
 
 console.log(curry(add)(1)(2)(3));
+function compose(...fns) {
+    return x =>
+        fns.reduceRight(
+            (value, fn) => fn(value),
+            x
+        );
+}
+
+const double = x => x * 2;
+const square = x => x * x;
+
+console.log(
+    compose(square, double)(5)
+);
