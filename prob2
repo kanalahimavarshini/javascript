@@ -310,3 +310,28 @@ class Trie {
         return true;
     }
 }
+class PriorityQueue {
+    constructor() {
+        this.heap = [];
+    }
+
+    enqueue(val) {
+        this.heap.push(val);
+        this.heap.sort((a, b) => a - b);
+    }
+
+    dequeue() {
+        return this.heap.shift();
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+}
+
+const pq = new PriorityQueue();
+pq.enqueue(10);
+pq.enqueue(3);
+pq.enqueue(7);
+
+console.log(pq.dequeue());
