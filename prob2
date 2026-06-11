@@ -449,3 +449,19 @@ console.log(
         {x:1,y:{z:2}}
     )
 );
+function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) {
+            return fn(...args);
+        }
+
+        return (...next) =>
+            curried(...args, ...next);
+    };
+}
+
+function add(a, b, c) {
+    return a + b + c;
+}
+
+console.log(curry(add)(1)(2)(3));
