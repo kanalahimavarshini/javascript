@@ -54,3 +54,40 @@ class UnionFind {
             this.find(y);
     }
 }
+function topologicalSort(n, edges) {
+    const graph = Array.from(
+        { length: n },
+        () => []
+    );
+
+    const indegree = Array(n).fill(0);
+
+    for (const [u, v] of edges) {
+        graph[u].push(v);
+        indegree[v]++;
+    }
+
+    const queue = [];
+
+    for (let i = 0; i < n; i++) {
+        if (indegree[i] === 0)
+            queue.push(i);
+    }
+
+    const result = [];
+
+    while (queue.length) {
+        let node = queue.shift();
+
+        result.push(node);
+
+        for (let nei of graph[node]) {
+            indegree[nei]--;
+
+            if (indegree[nei] === 0)
+                queue.push(nei);
+        }
+    }
+
+    return result;
+}
