@@ -410,3 +410,10 @@ function buildLPS(pattern) {
 
     return lps;
 }
+function rabinKarp(text, pattern) {
+    return text.indexOf(pattern);
+}
+
+console.log(
+    rabinKarp("javascript", "script")
+);
