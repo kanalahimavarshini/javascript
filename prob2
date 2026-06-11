@@ -91,3 +91,27 @@ function topologicalSort(n, edges) {
 
     return result;
 }
+class SegmentTree {
+    constructor(arr) {
+        this.n = arr.length;
+        this.tree = Array(4 * this.n);
+
+        this.build(arr, 1, 0, this.n - 1);
+    }
+
+    build(arr, node, start, end) {
+        if (start === end) {
+            this.tree[node] = arr[start];
+            return;
+        }
+
+        let mid = Math.floor((start + end) / 2);
+
+        this.build(arr, node * 2, start, mid);
+        this.build(arr, node * 2 + 1, mid + 1, end);
+
+        this.tree[node] =
+            this.tree[node * 2] +
+            this.tree[node * 2 + 1];
+    }
+}
