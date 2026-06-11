@@ -115,3 +115,26 @@ class SegmentTree {
             this.tree[node * 2 + 1];
     }
 }
+class FenwickTree {
+    constructor(size) {
+        this.bit = Array(size + 1).fill(0);
+    }
+
+    update(index, value) {
+        while (index < this.bit.length) {
+            this.bit[index] += value;
+            index += index & -index;
+        }
+    }
+
+    query(index) {
+        let sum = 0;
+
+        while (index > 0) {
+            sum += this.bit[index];
+            index -= index & -index;
+        }
+
+        return sum;
+    }
+}
