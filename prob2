@@ -184,3 +184,29 @@ const a = new Singleton();
 const b = new Singleton();
 
 console.log(a === b);
+class Car {
+    drive() {
+        console.log("Driving Car");
+    }
+}
+
+class Bike {
+    ride() {
+        console.log("Riding Bike");
+    }
+}
+
+class VehicleFactory {
+    static create(type) {
+        if (type === "car")
+            return new Car();
+
+        if (type === "bike")
+            return new Bike();
+    }
+}
+
+const vehicle =
+    VehicleFactory.create("car");
+
+vehicle.drive();
