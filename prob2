@@ -672,3 +672,29 @@ class Trie {
         return node.end;
     }
 }
+class AsyncQueue {
+    constructor() {
+        this.queue = [];
+        this.waiters = [];
+    }
+
+    enqueue(item) {
+        if (this.waiters.length) {
+            this.waiters.shift()(item);
+        } else {
+            this.queue.push(item);
+        }
+    }
+
+    dequeue() {
+        if (this.queue.length) {
+            return Promise.resolve(
+                this.queue.shift()
+            );
+        }
+
+        return new Promise(resolve =>
+            this.waiters.push(resolve)
+        );
+    }
+}
