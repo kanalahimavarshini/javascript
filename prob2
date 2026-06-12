@@ -698,3 +698,31 @@ class AsyncQueue {
         );
     }
 }
+class EventBus {
+    constructor() {
+        this.events = {};
+    }
+
+    subscribe(event, callback) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+
+        this.events[event].push(callback);
+    }
+
+    publish(event, data) {
+        if (this.events[event]) {
+            this.events[event]
+                .forEach(cb => cb(data));
+        }
+    }
+}
+
+const bus = new EventBus();
+
+bus.subscribe("msg", data =>
+    console.log(data)
+);
+
+bus.publish("msg", "Hello");
