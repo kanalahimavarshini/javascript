@@ -588,3 +588,14 @@ function bfs(graph, start) {
         }
     }
 }
+function dfs(graph, node, visited = new Set()) {
+    visited.add(node);
+
+    console.log(node);
+
+    for (let neighbor of graph[node]) {
+        if (!visited.has(neighbor)) {
+            dfs(graph, neighbor, visited);
+        }
+    }
+}
