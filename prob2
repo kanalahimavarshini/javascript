@@ -751,3 +751,11 @@ async function promisePool(tasks, limit) {
 
     return Promise.all(results);
 }
+class Node {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+        this.prev = null;
+        this.next = null;
+    }
+}
