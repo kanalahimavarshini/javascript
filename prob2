@@ -726,3 +726,28 @@ bus.subscribe("msg", data =>
 );
 
 bus.publish("msg", "Hello");
+async function promisePool(tasks, limit) {
+    const results = [];
+    const executing = [];
+
+    for (const task of tasks) {
+        const p = task().then(res =>
+            results.push(res)
+        );
+
+        executing.push(p);
+
+        if (executing.length >= limit) {
+            await Promise.race(executing);
+
+            executing.splice(
+                executing.findIndex(
+                    e => e === p
+                ),
+                1
+            );
+        }
+    }
+
+    return Promise.all(results);
+}
