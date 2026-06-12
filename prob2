@@ -599,3 +599,28 @@ function dfs(graph, node, visited = new Set()) {
         }
     }
 }
+function hasCycle(graph) {
+    const visited = new Set();
+    const recStack = new Set();
+
+    function dfs(node) {
+        if (recStack.has(node)) return true;
+        if (visited.has(node)) return false;
+
+        visited.add(node);
+        recStack.add(node);
+
+        for (const nei of graph[node]) {
+            if (dfs(nei)) return true;
+        }
+
+        recStack.delete(node);
+        return false;
+    }
+
+    for (const node in graph) {
+        if (dfs(node)) return true;
+    }
+
+    return false;
+}
