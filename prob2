@@ -759,3 +759,17 @@ class Node {
         this.next = null;
     }
 }
+async function crawl(urls) {
+    const results = [];
+
+    for (const url of urls) {
+        try {
+            const response = await fetch(url);
+            results.push(await response.text());
+        } catch (e) {
+            console.log("Failed:", url);
+        }
+    }
+
+    return results;
+}
