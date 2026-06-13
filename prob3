@@ -250,3 +250,41 @@ worker.on('message', msg => {
 });
 
 worker.postMessage('start');
+class Middleware {
+    constructor() {
+        this.middlewares = [];
+    }
+
+    use(fn) {
+        this.middlewares.push(fn);
+    }
+
+    execute(context) {
+        let index = 0;
+
+        const next = () => {
+            if (index < this.middlewares.length) {
+                this.middlewares[index++](
+                    context,
+                    next
+                );
+            }
+        };
+
+        next();
+    }
+}
+
+const app = new Middleware();
+
+app.use((ctx, next) => {
+    console.log("First");
+    next();
+});
+
+app.use((ctx, next) => {
+    console.log("Second");
+    next();
+});
+
+app.execute({});
