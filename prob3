@@ -451,3 +451,18 @@ function matrixChain(arr) {
 
     return dp[1][n - 1];
 }
+function aStar(start, goal, heuristic) {
+    const open = [start];
+    const gScore = { [start]: 0 };
+
+    while (open.length) {
+        let current = open.shift();
+
+        if (current === goal)
+            return gScore[current];
+
+        // Expand neighbors here
+    }
+
+    return -1;
+}
