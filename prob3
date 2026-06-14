@@ -306,3 +306,26 @@ function getBalance(node) {
         ? height(node.left) - height(node.right)
         : 0;
 }
+function serialize(root) {
+    if (!root) return "null";
+
+    return `${root.val},${serialize(root.left)},${serialize(root.right)}`;
+}
+
+function deserialize(data) {
+    const nodes = data.split(',');
+
+    function build() {
+        const val = nodes.shift();
+
+        if (val === "null") return null;
+
+        return {
+            val: Number(val),
+            left: build(),
+            right: build()
+        };
+    }
+
+    return build();
+}
