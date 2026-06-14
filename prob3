@@ -466,3 +466,28 @@ function aStar(start, goal, heuristic) {
 
     return -1;
 }
+class CircuitBreaker {
+    constructor(fn, threshold = 3) {
+        this.fn = fn;
+        this.threshold = threshold;
+        this.failures = 0;
+    }
+
+    async call(...args) {
+        try {
+            const result = await this.fn(...args);
+
+            this.failures = 0;
+
+            return result;
+        } catch {
+            this.failures++;
+
+            if (this.failures >= this.threshold) {
+                throw new Error(
+                    "Circuit Open"
+                );
+            }
+        }
+    }
+}
