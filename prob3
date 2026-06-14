@@ -537,3 +537,20 @@ container.register(
 container.resolve("logger")(
     "Dependency Injected"
 );
+const WebSocket =
+    require("ws");
+
+const server =
+    new WebSocket.Server({
+        port: 8080
+    });
+
+server.on("connection", ws => {
+    ws.on("message", msg => {
+        server.clients.forEach(client => {
+            if (client.readyState === 1) {
+                client.send(msg.toString());
+            }
+        });
+    });
+});
