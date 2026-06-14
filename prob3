@@ -491,3 +491,25 @@ class CircuitBreaker {
         }
     }
 }
+class TokenBucket {
+    constructor(capacity, refillRate) {
+        this.capacity = capacity;
+        this.tokens = capacity;
+
+        setInterval(() => {
+            this.tokens = Math.min(
+                this.capacity,
+                this.tokens + refillRate
+            );
+        }, 1000);
+    }
+
+    allowRequest() {
+        if (this.tokens > 0) {
+            this.tokens--;
+            return true;
+        }
+
+        return false;
+    }
+}
