@@ -513,3 +513,27 @@ class TokenBucket {
         return false;
     }
 }
+class Container {
+    constructor() {
+        this.services = {};
+    }
+
+    register(name, service) {
+        this.services[name] = service;
+    }
+
+    resolve(name) {
+        return this.services[name];
+    }
+}
+
+const container = new Container();
+
+container.register(
+    "logger",
+    console.log
+);
+
+container.resolve("logger")(
+    "Dependency Injected"
+);
