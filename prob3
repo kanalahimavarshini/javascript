@@ -350,3 +350,29 @@ function lowestCommonAncestor(root, p, q) {
 
     return left || right;
 }
+function longestPalindrome(s) {
+    let result = "";
+
+    function expand(l, r) {
+        while (
+            l >= 0 &&
+            r < s.length &&
+            s[l] === s[r]
+        ) {
+            if (r - l + 1 > result.length) {
+                result = s.substring(l, r + 1);
+            }
+            l--;
+            r++;
+        }
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        expand(i, i);
+        expand(i, i + 1);
+    }
+
+    return result;
+}
+
+console.log(longestPalindrome("babad"));
