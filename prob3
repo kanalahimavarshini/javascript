@@ -288,3 +288,21 @@ app.use((ctx, next) => {
 });
 
 app.execute({});
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+        this.height = 1;
+    }
+}
+
+function height(node) {
+    return node ? node.height : 0;
+}
+
+function getBalance(node) {
+    return node
+        ? height(node.left) - height(node.right)
+        : 0;
+}
