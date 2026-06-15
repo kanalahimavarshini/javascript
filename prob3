@@ -586,3 +586,20 @@ function heapSort(arr) {
 
     return arr;
 }
+function bellmanFord(vertices, edges, source) {
+    const dist = Array(vertices).fill(Infinity);
+    dist[source] = 0;
+
+    for (let i = 0; i < vertices - 1; i++) {
+        for (const [u, v, w] of edges) {
+            if (
+                dist[u] !== Infinity &&
+                dist[u] + w < dist[v]
+            ) {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    return dist;
+}
