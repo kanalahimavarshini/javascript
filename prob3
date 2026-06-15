@@ -715,3 +715,22 @@ const command =
     new LightOnCommand(light);
 
 command.execute();
+class PaymentStrategy {
+    pay(amount) {}
+}
+
+class CreditCard extends PaymentStrategy {
+    pay(amount) {
+        console.log(
+            `Paid ${amount} via Card`
+        );
+    }
+}
+
+class PayPal extends PaymentStrategy {
+    pay(amount) {
+        console.log(
+            `Paid ${amount} via PayPal`
+        );
+    }
+}
