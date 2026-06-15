@@ -798,3 +798,35 @@ async function* asyncCounter() {
         console.log(num);
     }
 })();
+class PubSub {
+    constructor() {
+        this.events = {};
+    }
+
+    subscribe(event, callback) {
+        if (!this.events[event]) {
+            this.events[event] = [];
+        }
+
+        this.events[event].push(callback);
+    }
+
+    publish(event, data) {
+        if (this.events[event]) {
+            this.events[event]
+                .forEach(cb => cb(data));
+        }
+    }
+}
+
+const pubsub = new PubSub();
+
+pubsub.subscribe(
+    "news",
+    msg => console.log(msg)
+);
+
+pubsub.publish(
+    "news",
+    "Breaking News!"
+);
