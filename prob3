@@ -690,3 +690,28 @@ class Observable {
         );
     }
 }
+class Light {
+    on() {
+        console.log("Light ON");
+    }
+
+    off() {
+        console.log("Light OFF");
+    }
+}
+
+class LightOnCommand {
+    constructor(light) {
+        this.light = light;
+    }
+
+    execute() {
+        this.light.on();
+    }
+}
+
+const light = new Light();
+const command =
+    new LightOnCommand(light);
+
+command.execute();
