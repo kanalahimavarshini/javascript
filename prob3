@@ -747,3 +747,23 @@ class Handler {
         return null;
     }
 }
+class RealImage {
+    display() {
+        console.log("Displaying Image");
+    }
+}
+
+class ProxyImage {
+    constructor() {
+        this.realImage = null;
+    }
+
+    display() {
+        if (!this.realImage) {
+            this.realImage =
+                new RealImage();
+        }
+
+        this.realImage.display();
+    }
+}
