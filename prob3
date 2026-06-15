@@ -620,3 +620,51 @@ function floydWarshall(graph) {
 
     return dist;
 }
+function tarjan(graph) {
+    let id = 0;
+    const ids = {};
+    const low = {};
+    const stack = [];
+    const onStack = {};
+    const sccs = [];
+
+    function dfs(at) {
+        stack.push(at);
+        onStack[at] = true;
+
+        ids[at] = low[at] = id++;
+
+        for (const to of graph[at]) {
+            if (ids[to] === undefined)
+                dfs(to);
+
+            if (onStack[to])
+                low[at] = Math.min(
+                    low[at],
+                    low[to]
+                );
+        }
+
+        if (ids[at] === low[at]) {
+            let scc = [];
+
+            while (true) {
+                let node = stack.pop();
+
+                onStack[node] = false;
+                scc.push(node);
+
+                if (node === at) break;
+            }
+
+            sccs.push(scc);
+        }
+    }
+
+    for (const node in graph) {
+        if (ids[node] === undefined)
+            dfs(node);
+    }
+
+    return sccs;
+}
