@@ -867,3 +867,39 @@ class LFUCache {
         }
     }
 }
+class WorkerPool {
+    constructor(size) {
+        this.size = size;
+        this.queue = [];
+        this.active = 0;
+    }
+
+    run(task) {
+        return new Promise(resolve => {
+            this.queue.push({ task, resolve });
+            this.next();
+        });
+    }
+
+    next() {
+        if (
+            this.active >= this.size ||
+            this.queue.length === 0
+        ) {
+            return;
+        }
+
+        const { task, resolve } =
+            this.queue.shift();
+
+        this.active++;
+
+        task().then(result => {
+            this.active--;
+
+            resolve(result);
+
+            this.next();
+        });
+    }
+}
