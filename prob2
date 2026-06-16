@@ -773,3 +773,23 @@ async function crawl(urls) {
 
     return results;
 }
+class URLShortener {
+    constructor() {
+        this.urls = new Map();
+        this.id = 0;
+    }
+
+    shorten(url) {
+        const short = (++this.id).toString(36);
+
+        this.urls.set(short, url);
+
+        return short;
+    }
+
+    expand(short) {
+        return this.urls.get(short);
+    }
+}
+
+const service = new URLShortener();
