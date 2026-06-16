@@ -713,3 +713,31 @@ function getIntersectionNode(headA, headB) {
 
     return a;
 }
+function morrisTraversal(root) {
+    let current = root;
+
+    while (current) {
+        if (!current.left) {
+            console.log(current.val);
+            current = current.right;
+        } else {
+            let predecessor = current.left;
+
+            while (
+                predecessor.right &&
+                predecessor.right !== current
+            ) {
+                predecessor = predecessor.right;
+            }
+
+            if (!predecessor.right) {
+                predecessor.right = current;
+                current = current.left;
+            } else {
+                predecessor.right = null;
+                console.log(current.val);
+                current = current.right;
+            }
+        }
+    }
+}
