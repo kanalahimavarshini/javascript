@@ -660,4 +660,21 @@ heap.insert(10);
 heap.insert(5);
 heap.insert(20);
 
-console.log(heap.extractMin()); // 5
+console.log(heap.extractMin()); 
+function memoizedFibonacci() {
+    const memo = {};
+
+    function fib(n) {
+        if (n <= 1) return n;
+
+        if (memo[n]) return memo[n];
+
+        memo[n] = fib(n - 1) + fib(n - 2);
+        return memo[n];
+    }
+
+    return fib;
+}
+
+const fib = memoizedFibonacci();
+console.log(fib(40));
