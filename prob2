@@ -840,3 +840,30 @@ function compose(middlewares) {
         return dispatch(0);
     };
 }
+class LFUCache {
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.cache = new Map();
+        this.freq = new Map();
+    }
+
+    get(key) {
+        if (!this.cache.has(key))
+            return -1;
+
+        this.freq.set(
+            key,
+            this.freq.get(key) + 1
+        );
+
+        return this.cache.get(key);
+    }
+
+    put(key, value) {
+        this.cache.set(key, value);
+
+        if (!this.freq.has(key)) {
+            this.freq.set(key, 1);
+        }
+    }
+}
