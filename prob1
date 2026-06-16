@@ -741,3 +741,35 @@ function morrisTraversal(root) {
         }
     }
 }
+function compress(input) {
+    let dict = {};
+    let data = input.split("");
+    let phrase = data[0];
+    let code = 256;
+    let output = [];
+
+    for (let i = 1; i < data.length; i++) {
+        let currChar = data[i];
+
+        if (dict[phrase + currChar]) {
+            phrase += currChar;
+        } else {
+            output.push(
+                phrase.length > 1
+                    ? dict[phrase]
+                    : phrase.charCodeAt(0)
+            );
+
+            dict[phrase + currChar] = code++;
+            phrase = currChar;
+        }
+    }
+
+    output.push(
+        phrase.length > 1
+            ? dict[phrase]
+            : phrase.charCodeAt(0)
+    );
+
+    return output;
+}
