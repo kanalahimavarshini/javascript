@@ -773,3 +773,53 @@ function compress(input) {
 
     return output;
 }
+class TrieNode {
+    constructor() {
+        this.children = {};
+        this.end = false;
+    }
+}
+
+class AutoComplete {
+    constructor() {
+        this.root = new TrieNode();
+    }
+
+    insert(word) {
+        let node = this.root;
+
+        for (let ch of word) {
+            if (!node.children[ch]) {
+                node.children[ch] = new TrieNode();
+            }
+
+            node = node.children[ch];
+        }
+
+        node.end = true;
+    }
+
+    suggest(prefix) {
+        let node = this.root;
+
+        for (let ch of prefix) {
+            if (!node.children[ch]) return [];
+
+            node = node.children[ch];
+        }
+
+        const result = [];
+
+        function dfs(curr, path) {
+            if (curr.end) result.push(path);
+
+            for (let c in curr.children) {
+                dfs(curr.children[c], path + c);
+            }
+        }
+
+        dfs(node, prefix);
+
+        return result;
+    }
+}
