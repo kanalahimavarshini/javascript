@@ -271,3 +271,32 @@ class RequestQueue {
         }
     }
 }
+function quickSelect(nums, k) {
+    const target = nums.length - k;
+
+    function select(left, right) {
+        const pivot = nums[right];
+        let p = left;
+
+        for (let i = left; i < right; i++) {
+            if (nums[i] < pivot) {
+                [nums[i], nums[p]] =
+                [nums[p], nums[i]];
+                p++;
+            }
+        }
+
+        [nums[p], nums[right]] =
+        [nums[right], nums[p]];
+
+        if (p === target) return nums[p];
+        if (p < target)
+            return select(p + 1, right);
+
+        return select(left, p - 1);
+    }
+
+    return select(0, nums.length - 1);
+}
+
+console.log(quickSelect([3,2,1,5,6,4], 2));
