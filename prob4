@@ -320,3 +320,32 @@ function nextGreaterElement(nums) {
 }
 
 console.log(nextGreaterElement([2,1,2,4,3]));
+function slidingWindowMin(nums, k) {
+    const deque = [];
+    const result = [];
+
+    for (let i = 0; i < nums.length; i++) {
+
+        while (
+            deque.length &&
+            deque[0] <= i - k
+        ) {
+            deque.shift();
+        }
+
+        while (
+            deque.length &&
+            nums[deque.at(-1)] >= nums[i]
+        ) {
+            deque.pop();
+        }
+
+        deque.push(i);
+
+        if (i >= k - 1) {
+            result.push(nums[deque[0]]);
+        }
+    }
+
+    return result;
+}
