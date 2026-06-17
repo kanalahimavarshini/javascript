@@ -217,3 +217,19 @@ class BloomFilter {
         ];
     }
 }
+class SpellChecker {
+    constructor(words) {
+        this.words = new Set(words);
+    }
+
+    check(word) {
+        return this.words.has(word);
+    }
+
+    suggest(prefix) {
+        return [...this.words]
+            .filter(word =>
+                word.startsWith(prefix)
+            );
+    }
+}
