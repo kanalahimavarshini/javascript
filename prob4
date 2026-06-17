@@ -141,3 +141,28 @@ function minMeetingRooms(intervals) {
 
     return rooms;
 }
+class MedianFinder {
+    constructor() {
+        this.data = [];
+    }
+
+    addNum(num) {
+        this.data.push(num);
+        this.data.sort((a, b) => a - b);
+    }
+
+    findMedian() {
+        const n = this.data.length;
+
+        if (n % 2 === 0) {
+            return (
+                this.data[n / 2 - 1] +
+                this.data[n / 2]
+            ) / 2;
+        }
+
+        return this.data[
+            Math.floor(n / 2)
+        ];
+    }
+}
