@@ -189,3 +189,31 @@ class ConsistentHash {
         return keys[0];
     }
 }
+class BloomFilter {
+    constructor(size = 100) {
+        this.bits = Array(size).fill(false);
+        this.size = size;
+    }
+
+    hash(value) {
+        let hash = 0;
+
+        for (let ch of value) {
+            hash += ch.charCodeAt(0);
+        }
+
+        return hash % this.size;
+    }
+
+    add(value) {
+        this.bits[
+            this.hash(value)
+        ] = true;
+    }
+
+    contains(value) {
+        return this.bits[
+            this.hash(value)
+        ];
+    }
+}
