@@ -300,3 +300,23 @@ function quickSelect(nums, k) {
 }
 
 console.log(quickSelect([3,2,1,5,6,4], 2));
+function nextGreaterElement(nums) {
+    const result = Array(nums.length).fill(-1);
+    const stack = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        while (
+            stack.length &&
+            nums[i] > nums[stack.at(-1)]
+        ) {
+            const idx = stack.pop();
+            result[idx] = nums[i];
+        }
+
+        stack.push(i);
+    }
+
+    return result;
+}
+
+console.log(nextGreaterElement([2,1,2,4,3]));
