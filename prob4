@@ -402,3 +402,22 @@ class LRUCache {
         }
     }
 }
+async function retry(fn, retries) {
+    let delay = 1000;
+
+    for (let i = 0; i < retries; i++) {
+        try {
+            return await fn();
+        } catch {
+            await new Promise(resolve =>
+                setTimeout(resolve, delay)
+            );
+
+            delay *= 2;
+        }
+    }
+
+    throw new Error(
+        "All retries failed"
+    );
+}
