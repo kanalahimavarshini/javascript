@@ -233,3 +233,41 @@ class SpellChecker {
             );
     }
 }
+class RequestQueue {
+    constructor(limit) {
+        this.limit = limit;
+        this.running = 0;
+        this.queue = [];
+    }
+
+    add(task) {
+        return new Promise(resolve => {
+            this.queue.push({
+                task,
+                resolve
+            });
+
+            this.run();
+        });
+    }
+
+    run() {
+        while (
+            this.running < this.limit &&
+            this.queue.length
+        ) {
+            const {
+                task,
+                resolve
+            } = this.queue.shift();
+
+            this.running++;
+
+            task().then(result => {
+                this.running--;
+                resolve(result);
+                this.run();
+            });
+        }
+    }
+}
