@@ -166,3 +166,26 @@ class MedianFinder {
         ];
     }
 }
+class ConsistentHash {
+    constructor() {
+        this.ring = new Map();
+    }
+
+    addNode(hash) {
+        this.ring.set(hash, true);
+    }
+
+    getNode(keyHash) {
+        const keys =
+            [...this.ring.keys()].sort(
+                (a, b) => a - b
+            );
+
+        for (const k of keys) {
+            if (k >= keyHash)
+                return k;
+        }
+
+        return keys[0];
+    }
+}
