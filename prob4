@@ -443,3 +443,17 @@ class AuthService {
 }
 
 const auth = new AuthService();
+function render(template, data) {
+    return template.replace(
+        /\{\{(.*?)\}\}/g,
+        (_, key) =>
+            data[key.trim()] || ""
+    );
+}
+
+const html = render(
+    "Hello {{ name }}",
+    { name: "John" }
+);
+
+console.log(html);
