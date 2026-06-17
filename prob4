@@ -421,3 +421,25 @@ async function retry(fn, retries) {
         "All retries failed"
     );
 }
+class AuthService {
+    constructor() {
+        this.tokens = new Set();
+    }
+
+    login(user) {
+        const token =
+            Math.random()
+                .toString(36)
+                .slice(2);
+
+        this.tokens.add(token);
+
+        return token;
+    }
+
+    verify(token) {
+        return this.tokens.has(token);
+    }
+}
+
+const auth = new AuthService();
