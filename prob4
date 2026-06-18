@@ -457,3 +457,36 @@ const html = render(
 );
 
 console.log(html);
+function topologicalSort(graph) {
+    const indegree = {};
+    const queue = [];
+    const result = [];
+
+    for (const node in graph) {
+        indegree[node] ??= 0;
+
+        for (const neighbor of graph[node]) {
+            indegree[neighbor] =
+                (indegree[neighbor] || 0) + 1;
+        }
+    }
+
+    for (const node in indegree) {
+        if (indegree[node] === 0)
+            queue.push(node);
+    }
+
+    while (queue.length) {
+        const node = queue.shift();
+        result.push(node);
+
+        for (const neighbor of graph[node] || []) {
+            indegree[neighbor]--;
+
+            if (indegree[neighbor] === 0)
+                queue.push(neighbor);
+        }
+    }
+
+    return result;
+}
