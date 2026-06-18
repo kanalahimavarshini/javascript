@@ -592,3 +592,17 @@ console.log(
         0
     )
 );
+function pipe(...fns) {
+    return value =>
+        fns.reduce(
+            (acc, fn) => fn(acc),
+            value
+        );
+}
+
+const add2 = x => x + 2;
+const double = x => x * 2;
+
+console.log(
+    pipe(add2, double)(5)
+);
