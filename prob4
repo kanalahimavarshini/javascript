@@ -614,3 +614,18 @@ function* range(start, end) {
 for (const num of range(1, 5)) {
     console.log(num);
 }
+class Scheduler {
+    constructor() {
+        this.tasks = [];
+    }
+
+    add(task, delay) {
+        this.tasks.push(
+            setTimeout(task, delay)
+        );
+    }
+
+    clear() {
+        this.tasks.forEach(clearTimeout);
+    }
+}
