@@ -512,3 +512,30 @@ function kosaraju(graph) {
 
     return stack.reverse();
 }
+function manacher(s) {
+    let t = "#" + s.split("").join("#") + "#";
+    let p = Array(t.length).fill(0);
+    let center = 0, right = 0;
+
+    for (let i = 0; i < t.length; i++) {
+        let mirror = 2 * center - i;
+
+        if (i < right)
+            p[i] = Math.min(right - i, p[mirror]);
+
+        while (
+            i - p[i] - 1 >= 0 &&
+            i + p[i] + 1 < t.length &&
+            t[i - p[i] - 1] === t[i + p[i] + 1]
+        ) {
+            p[i]++;
+        }
+
+        if (i + p[i] > right) {
+            center = i;
+            right = i + p[i];
+        }
+    }
+
+    return Math.max(...p);
+}
