@@ -606,3 +606,11 @@ const double = x => x * 2;
 console.log(
     pipe(add2, double)(5)
 );
+function* range(start, end) {
+    for (let i = start; i <= end; i++)
+        yield i;
+}
+
+for (const num of range(1, 5)) {
+    console.log(num);
+}
