@@ -539,3 +539,23 @@ function manacher(s) {
 
     return Math.max(...p);
 }
+function majorityElement(nums) {
+    let candidate = null;
+    let count = 0;
+
+    for (const num of nums) {
+        if (count === 0)
+            candidate = num;
+
+        count +=
+            (num === candidate)
+                ? 1
+                : -1;
+    }
+
+    return candidate;
+}
+
+console.log(
+    majorityElement([2,2,1,1,1,2,2])
+);
