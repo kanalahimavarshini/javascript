@@ -490,3 +490,25 @@ function topologicalSort(graph) {
 
     return result;
 }
+function kosaraju(graph) {
+    const visited = new Set();
+    const stack = [];
+
+    function dfs(node) {
+        visited.add(node);
+
+        for (const nei of graph[node] || []) {
+            if (!visited.has(nei))
+                dfs(nei);
+        }
+
+        stack.push(node);
+    }
+
+    Object.keys(graph).forEach(node => {
+        if (!visited.has(node))
+            dfs(node);
+    });
+
+    return stack.reverse();
+}
