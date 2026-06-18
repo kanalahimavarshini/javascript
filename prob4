@@ -573,3 +573,22 @@ function reservoirSampling(stream, k) {
 
     return reservoir;
 }
+Array.prototype.myReduce = function (
+    callback,
+    initial
+) {
+    let acc = initial;
+
+    for (let i = 0; i < this.length; i++) {
+        acc = callback(acc, this[i]);
+    }
+
+    return acc;
+};
+
+console.log(
+    [1,2,3,4].myReduce(
+        (a, b) => a + b,
+        0
+    )
+);
