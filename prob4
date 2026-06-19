@@ -878,3 +878,31 @@ class CircularQueue {
         return true;
     }
 }
+class RWLock {
+    constructor() {
+        this.readers = 0;
+        this.writer = false;
+    }
+
+    acquireRead() {
+        if (!this.writer)
+            this.readers++;
+    }
+
+    releaseRead() {
+        this.readers--;
+    }
+
+    acquireWrite() {
+        if (
+            this.readers === 0 &&
+            !this.writer
+        ) {
+            this.writer = true;
+        }
+    }
+
+    releaseWrite() {
+        this.writer = false;
+    }
+}
