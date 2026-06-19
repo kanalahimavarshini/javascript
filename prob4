@@ -705,3 +705,27 @@ bit.update(1, 5);
 bit.update(3, 2);
 
 console.log(bit.query(3));
+class SegmentTree {
+    constructor(nums) {
+        this.n = nums.length;
+        this.tree = Array(4 * this.n);
+
+        this.build(nums, 1, 0, this.n - 1);
+    }
+
+    build(nums, node, start, end) {
+        if (start === end) {
+            this.tree[node] = nums[start];
+            return;
+        }
+
+        let mid = Math.floor((start + end) / 2);
+
+        this.build(nums, node * 2, start, mid);
+        this.build(nums, node * 2 + 1, mid + 1, end);
+
+        this.tree[node] =
+            this.tree[node * 2] +
+            this.tree[node * 2 + 1];
+    }
+}
