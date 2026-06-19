@@ -729,3 +729,12 @@ class SegmentTree {
             this.tree[node * 2 + 1];
     }
 }
+function evaluate(expression) {
+    return Function(
+        `"use strict"; return (${expression})`
+    )();
+}
+
+console.log(
+    evaluate("5 + 3 * 2")
+);
