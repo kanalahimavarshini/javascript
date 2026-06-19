@@ -937,3 +937,34 @@ document
             }
         }
     );
+    class Semaphore {
+    constructor(limit) {
+        this.limit = limit;
+        this.running = 0;
+        this.queue = [];
+    }
+
+    async acquire() {
+        if (
+            this.running <
+            this.limit
+        ) {
+            this.running++;
+            return;
+        }
+
+        await new Promise(resolve =>
+            this.queue.push(resolve)
+        );
+
+        this.running++;
+    }
+
+    release() {
+        this.running--;
+
+        if (this.queue.length) {
+            this.queue.shift()();
+        }
+    }
+}
