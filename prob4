@@ -922,3 +922,18 @@ const factorial = (() => {
 })();
 
 console.log(factorial(10));
+document
+    .getElementById("list")
+    .addEventListener(
+        "click",
+        event => {
+            if (
+                event.target.tagName ===
+                "LI"
+            ) {
+                console.log(
+                    event.target.innerText
+                );
+            }
+        }
+    );
