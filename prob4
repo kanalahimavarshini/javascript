@@ -813,3 +813,33 @@ class Node {
         this.next = null;
     }
 }
+class MinStack {
+    constructor() {
+        this.stack = [];
+        this.minStack = [];
+    }
+
+    push(val) {
+        this.stack.push(val);
+
+        if (
+            !this.minStack.length ||
+            val <= this.getMin()
+        ) {
+            this.minStack.push(val);
+        }
+    }
+
+    pop() {
+        if (
+            this.stack.pop() ===
+            this.getMin()
+        ) {
+            this.minStack.pop();
+        }
+    }
+
+    getMin() {
+        return this.minStack.at(-1);
+    }
+}
