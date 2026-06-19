@@ -676,3 +676,32 @@ console.log(
         age: 25
     })
 );
+class FenwickTree {
+    constructor(size) {
+        this.tree = Array(size + 1).fill(0);
+    }
+
+    update(index, delta) {
+        while (index < this.tree.length) {
+            this.tree[index] += delta;
+            index += index & -index;
+        }
+    }
+
+    query(index) {
+        let sum = 0;
+
+        while (index > 0) {
+            sum += this.tree[index];
+            index -= index & -index;
+        }
+
+        return sum;
+    }
+}
+
+const bit = new FenwickTree(5);
+bit.update(1, 5);
+bit.update(3, 2);
+
+console.log(bit.query(3));
