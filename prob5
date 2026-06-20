@@ -72,3 +72,25 @@ function postorder(root) {
 
     console.log(root.val);
 }
+function graphDiameter(graph, start) {
+    const visited = new Set();
+
+    function dfs(node) {
+        visited.add(node);
+
+        let maxDepth = 0;
+
+        for (const nei of graph[node]) {
+            if (!visited.has(nei)) {
+                maxDepth = Math.max(
+                    maxDepth,
+                    dfs(nei)
+                );
+            }
+        }
+
+        return maxDepth + 1;
+    }
+
+    return dfs(start);
+}
