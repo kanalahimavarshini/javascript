@@ -127,3 +127,25 @@ class DSU {
         }
     }
 }
+class Coffee {
+    cost() {
+        return 5;
+    }
+}
+
+class MilkDecorator {
+    constructor(coffee) {
+        this.coffee = coffee;
+    }
+
+    cost() {
+        return this.coffee.cost() + 2;
+    }
+}
+
+const coffee =
+    new MilkDecorator(
+        new Coffee()
+    );
+
+console.log(coffee.cost());
