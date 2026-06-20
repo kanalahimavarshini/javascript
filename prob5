@@ -149,3 +149,24 @@ const coffee =
     );
 
 console.log(coffee.cost());
+class OldAPI {
+    oldMethod() {
+        return "Old";
+    }
+}
+
+class Adapter {
+    constructor(api) {
+        this.api = api;
+    }
+
+    newMethod() {
+        return this.api.oldMethod();
+    }
+}
+
+console.log(
+    new Adapter(
+        new OldAPI()
+    ).newMethod()
+);
