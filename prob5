@@ -94,3 +94,36 @@ function graphDiameter(graph, start) {
 
     return dfs(start);
 }
+class DSU {
+    constructor(n) {
+        this.parent = [...Array(n).keys()];
+        this.rank = Array(n).fill(0);
+    }
+
+    find(x) {
+        if (this.parent[x] !== x) {
+            this.parent[x] =
+                this.find(this.parent[x]);
+        }
+
+        return this.parent[x];
+    }
+
+    union(x, y) {
+        let px = this.find(x);
+        let py = this.find(y);
+
+        if (px === py) return;
+
+        if (this.rank[px] < this.rank[py]) {
+            this.parent[px] = py;
+        } else if (
+            this.rank[px] > this.rank[py]
+        ) {
+            this.parent[py] = px;
+        } else {
+            this.parent[py] = px;
+            this.rank[px]++;
+        }
+    }
+}
