@@ -189,3 +189,31 @@ const user =
     new UserBuilder("John")
         .setAge(25)
         .build();
+        class File {
+    constructor(name) {
+        this.name = name;
+    }
+
+    display() {
+        console.log(this.name);
+    }
+}
+
+class Folder {
+    constructor(name) {
+        this.name = name;
+        this.items = [];
+    }
+
+    add(item) {
+        this.items.push(item);
+    }
+
+    display() {
+        console.log(this.name);
+
+        this.items.forEach(
+            item => item.display()
+        );
+    }
+}
