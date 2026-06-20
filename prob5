@@ -36,3 +36,16 @@ function kmpSearch(text, pattern) {
 
     return -1;
 }
+function rabinKarp(text, pattern) {
+    const m = pattern.length;
+
+    for (let i = 0; i <= text.length - m; i++) {
+        if (
+            text.substring(i, i + m) === pattern
+        ) {
+            return i;
+        }
+    }
+
+    return -1;
+}
