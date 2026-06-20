@@ -217,3 +217,23 @@ class Folder {
         );
     }
 }
+class FlyweightFactory {
+    constructor() {
+        this.cache = {};
+    }
+
+    get(color) {
+        if (!this.cache[color]) {
+            this.cache[color] = { color };
+        }
+
+        return this.cache[color];
+    }
+}
+
+const factory =
+    new FlyweightFactory();
+
+console.log(
+    factory.get("red")
+);
