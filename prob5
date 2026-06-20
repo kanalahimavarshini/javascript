@@ -170,3 +170,22 @@ console.log(
         new OldAPI()
     ).newMethod()
 );
+class UserBuilder {
+    constructor(name) {
+        this.user = { name };
+    }
+
+    setAge(age) {
+        this.user.age = age;
+        return this;
+    }
+
+    build() {
+        return this.user;
+    }
+}
+
+const user =
+    new UserBuilder("John")
+        .setAge(25)
+        .build();
