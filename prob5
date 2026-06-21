@@ -326,3 +326,22 @@ function mergeKLists(lists) {
 
     return values;
 }
+function rob(nums) {
+    let prev1 = 0;
+    let prev2 = 0;
+
+    for (const num of nums) {
+        let temp = prev1;
+
+        prev1 = Math.max(
+            prev2 + num,
+            prev1
+        );
+
+        prev2 = temp;
+    }
+
+    return prev1;
+}
+
+console.log(rob([2,7,9,3,1]));
