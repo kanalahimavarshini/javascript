@@ -498,3 +498,30 @@ function rotate(matrix) {
 
     matrix.forEach(row => row.reverse());
 }
+function setZeroes(matrix) {
+    const rows = new Set();
+    const cols = new Set();
+
+    for (let i = 0; i < matrix.length; i++) {
+        for (
+            let j = 0;
+            j < matrix[0].length;
+            j++
+        ) {
+            if (matrix[i][j] === 0) {
+                rows.add(i);
+                cols.add(j);
+            }
+        }
+    }
+
+    for (const r of rows) {
+        matrix[r].fill(0);
+    }
+
+    for (const c of cols) {
+        for (let r = 0; r < matrix.length; r++) {
+            matrix[r][c] = 0;
+        }
+    }
+}
