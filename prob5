@@ -429,3 +429,30 @@ function canFinish(numCourses, prerequisites) {
 
     return true;
 }
+function ladderLength(beginWord, endWord, wordList) {
+    const words = new Set(wordList);
+    let queue = [[beginWord, 1]];
+
+    while (queue.length) {
+        const [word, level] = queue.shift();
+
+        if (word === endWord)
+            return level;
+
+        for (let i = 0; i < word.length; i++) {
+            for (let c = 97; c <= 122; c++) {
+                let next =
+                    word.slice(0, i) +
+                    String.fromCharCode(c) +
+                    word.slice(i + 1);
+
+                if (words.has(next)) {
+                    words.delete(next);
+                    queue.push([next, level + 1]);
+                }
+            }
+        }
+    }
+
+    return 0;
+}
