@@ -310,3 +310,19 @@ function combinationSum(candidates, target) {
     backtrack(0, 0, []);
     return result;
 }
+function mergeKLists(lists) {
+    let values = [];
+
+    for (const list of lists) {
+        let curr = list;
+
+        while (curr) {
+            values.push(curr.val);
+            curr = curr.next;
+        }
+    }
+
+    values.sort((a, b) => a - b);
+
+    return values;
+}
