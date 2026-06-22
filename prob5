@@ -598,3 +598,21 @@ function evalRPN(tokens) {
 }
 
 console.log(evalRPN(["2","1","+","3","*"]));
+function dailyTemperatures(temp) {
+    const res = Array(temp.length).fill(0);
+    const stack = [];
+
+    for (let i = 0; i < temp.length; i++) {
+        while (
+            stack.length &&
+            temp[i] > temp[stack.at(-1)]
+        ) {
+            let idx = stack.pop();
+            res[idx] = i - idx;
+        }
+
+        stack.push(i);
+    }
+
+    return res;
+}
