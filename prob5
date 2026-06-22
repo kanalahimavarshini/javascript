@@ -796,3 +796,20 @@ function numDecodings(s) {
 
     return curr;
 }
+function canPartition(nums) {
+    const total =
+        nums.reduce((a, b) => a + b, 0);
+
+    if (total % 2) return false;
+
+    const target = total / 2;
+    const dp = new Set([0]);
+
+    for (const num of nums) {
+        for (const sum of [...dp]) {
+            dp.add(sum + num);
+        }
+    }
+
+    return dp.has(target);
+}
