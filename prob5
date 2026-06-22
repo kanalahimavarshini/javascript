@@ -768,3 +768,31 @@ function lengthOfLIS(nums) {
 
     return dp.length;
 }
+function numDecodings(s) {
+    let prev = 1;
+    let curr = s[0] === "0" ? 0 : 1;
+
+    for (let i = 1; i < s.length; i++) {
+        let temp = 0;
+
+        if (s[i] !== "0")
+            temp += curr;
+
+        let twoDigit =
+            Number(
+                s.substring(i - 1, i + 1)
+            );
+
+        if (
+            twoDigit >= 10 &&
+            twoDigit <= 26
+        ) {
+            temp += prev;
+        }
+
+        prev = curr;
+        curr = temp;
+    }
+
+    return curr;
+}
