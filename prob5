@@ -894,3 +894,21 @@ class RateLimiter {
         );
     }
 }
+class PriorityQueue {
+    constructor() {
+        this.heap = [];
+    }
+
+    enqueue(val) {
+        this.heap.push(val);
+        this.heap.sort((a, b) => a - b);
+    }
+
+    dequeue() {
+        return this.heap.shift();
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+}
