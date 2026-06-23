@@ -848,3 +848,14 @@ app.post("/users", (req, res) => {
 });
 
 app.listen(3000);
+async function crawl(urls) {
+    for (const url of urls) {
+        const response = await fetch(url);
+        const html = await response.text();
+
+        console.log(
+            url,
+            html.length
+        );
+    }
+}
