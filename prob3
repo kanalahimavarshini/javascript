@@ -874,3 +874,27 @@ console.log(
         "# Title\n**Bold**"
     )
 );
+function resolveDependencies(
+    graph,
+    start
+) {
+    const visited = new Set();
+    const order = [];
+
+    function dfs(node) {
+        if (visited.has(node))
+            return;
+
+        visited.add(node);
+
+        for (const dep of graph[node]) {
+            dfs(dep);
+        }
+
+        order.push(node);
+    }
+
+    dfs(start);
+
+    return order;
+}
