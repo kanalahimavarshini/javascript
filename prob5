@@ -912,3 +912,44 @@ class PriorityQueue {
         return this.heap[0];
     }
 }
+function dijkstra(graph, start) {
+    const dist = {};
+
+    for (const node in graph) {
+        dist[node] = Infinity;
+    }
+
+    dist[start] = 0;
+
+    const pq = [[0, start]];
+
+    while (pq.length) {
+        pq.sort((a, b) => a[0] - b[0]);
+
+        const [cost, node] =
+            pq.shift();
+
+        for (const [
+            next,
+            weight
+        ] of graph[node]) {
+
+            const newCost =
+                cost + weight;
+
+            if (
+                newCost <
+                dist[next]
+            ) {
+                dist[next] = newCost;
+
+                pq.push([
+                    newCost,
+                    next
+                ]);
+            }
+        }
+    }
+
+    return dist;
+}
