@@ -830,3 +830,30 @@ pubsub.publish(
     "news",
     "Breaking News!"
 );
+class TaskQueue {
+    constructor() {
+        this.tasks = [];
+        this.running = false;
+    }
+
+    add(task) {
+        this.tasks.push(task);
+
+        if (!this.running) {
+            this.run();
+        }
+    }
+
+    async run() {
+        this.running = true;
+
+        while (this.tasks.length) {
+            const task =
+                this.tasks.shift();
+
+            await task();
+        }
+
+        this.running = false;
+    }
+}
