@@ -953,3 +953,10 @@ function dijkstra(graph, start) {
 
     return dist;
 }
+class TrieNode {
+    constructor() {
+        this.children = {};
+        this.fail = null;
+        this.output = [];
+    }
+}
