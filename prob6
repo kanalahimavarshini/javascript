@@ -168,3 +168,19 @@ function prefixSum(nums) {
 }
 
 console.log(prefixSum([1,2,3,4]));
+function rangeUpdate(n, updates) {
+    let diff = Array(n).fill(0);
+
+    for (const [l, r, val] of updates) {
+        diff[l] += val;
+
+        if (r + 1 < n)
+            diff[r + 1] -= val;
+    }
+
+    for (let i = 1; i < n; i++) {
+        diff[i] += diff[i - 1];
+    }
+
+    return diff;
+}
