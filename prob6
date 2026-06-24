@@ -155,3 +155,16 @@ function power(x, n) {
 }
 
 console.log(power(2, 10));
+function prefixSum(nums) {
+    let prefix = [0];
+
+    for (let num of nums) {
+        prefix.push(
+            prefix.at(-1) + num
+        );
+    }
+
+    return prefix;
+}
+
+console.log(prefixSum([1,2,3,4]));
