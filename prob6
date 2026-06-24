@@ -141,3 +141,17 @@ function lcm(a, b) {
 }
 
 console.log(lcm(12, 18));
+function power(x, n) {
+    if (n === 0)
+        return 1;
+
+    let half =
+        power(x, Math.floor(n / 2));
+
+    if (n % 2 === 0)
+        return half * half;
+
+    return x * half * half;
+}
+
+console.log(power(2, 10));
