@@ -294,3 +294,32 @@ function hasCycle(graph) {
 
     return false;
 }
+function kruskal(edges, n) {
+    const parent =
+        Array.from({ length: n },
+        (_, i) => i);
+
+    function find(x) {
+        if (parent[x] !== x) {
+            parent[x] = find(parent[x]);
+        }
+
+        return parent[x];
+    }
+
+    edges.sort((a, b) => a[2] - b[2]);
+
+    let cost = 0;
+
+    for (const [u, v, w] of edges) {
+        const pu = find(u);
+        const pv = find(v);
+
+        if (pu !== pv) {
+            parent[pu] = pv;
+            cost += w;
+        }
+    }
+
+    return cost;
+}
