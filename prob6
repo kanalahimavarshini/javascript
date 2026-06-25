@@ -323,3 +323,30 @@ function kruskal(edges, n) {
 
     return cost;
 }
+function prim(graph, start) {
+    const visited = new Set();
+    const pq = [[0, start]];
+    let cost = 0;
+
+    while (pq.length) {
+        pq.sort((a, b) => a[0] - b[0]);
+
+        const [weight, node] =
+            pq.shift();
+
+        if (visited.has(node))
+            continue;
+
+        visited.add(node);
+        cost += weight;
+
+        for (const [next, w]
+            of graph[node]) {
+            if (!visited.has(next)) {
+                pq.push([w, next]);
+            }
+        }
+    }
+
+    return cost;
+}
