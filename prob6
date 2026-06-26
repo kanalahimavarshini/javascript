@@ -503,3 +503,9 @@ function countSetBits(n) {
 }
 
 console.log(countSetBits(29)); // 4
+function isPowerOfTwo(n) {
+    return n > 0 && (n & (n - 1)) === 0;
+}
+
+console.log(isPowerOfTwo(16));
+console.log(isPowerOfTwo(18));
