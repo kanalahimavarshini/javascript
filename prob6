@@ -587,3 +587,20 @@ function hasPathSum(root, targetSum) {
         )
     );
 }
+function generatePascal(numRows) {
+    const result = [];
+
+    for (let i = 0; i < numRows; i++) {
+        result[i] = Array(i + 1).fill(1);
+
+        for (let j = 1; j < i; j++) {
+            result[i][j] =
+                result[i - 1][j - 1] +
+                result[i - 1][j];
+        }
+    }
+
+    return result;
+}
+
+console.log(generatePascal(5));
