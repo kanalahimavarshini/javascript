@@ -695,3 +695,12 @@ function levelOrder(root) {
 
     return result;
 }
+function serialize(root) {
+    if (!root) return "null";
+
+    return (
+        root.val + "," +
+        serialize(root.left) + "," +
+        serialize(root.right)
+    );
+}
