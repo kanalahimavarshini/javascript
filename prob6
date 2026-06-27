@@ -828,3 +828,41 @@ function minDistance(word1, word2) {
 
     return dp[word1.length][word2.length];
 }
+function longestPalindrome(s) {
+    let answer = "";
+
+    function expand(left, right) {
+        while (
+            left >= 0 &&
+            right < s.length &&
+            s[left] === s[right]
+        ) {
+            left--;
+            right++;
+        }
+
+        return s.slice(left + 1, right);
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        const odd =
+            expand(i, i);
+
+        const even =
+            expand(i, i + 1);
+
+        const longer =
+            odd.length > even.length
+                ? odd
+                : even;
+
+        if (
+            longer.length >
+            answer.length
+        ) {
+            answer = longer;
+        }
+    }
+
+    return answer;
+}
