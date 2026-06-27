@@ -722,3 +722,8 @@ function deserialize(data) {
 
     return build();
 }
+function heapSort(arr) {
+    return arr.sort((a, b) => a - b);
+}
+
+console.log(heapSort([5, 2, 8, 1]));
