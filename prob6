@@ -704,3 +704,21 @@ function serialize(root) {
         serialize(root.right)
     );
 }
+function deserialize(data) {
+    const nodes = data.split(",");
+
+    function build() {
+        const val = nodes.shift();
+
+        if (val === "null")
+            return null;
+
+        return {
+            val: Number(val),
+            left: build(),
+            right: build()
+        };
+    }
+
+    return build();
+}
