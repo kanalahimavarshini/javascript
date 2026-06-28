@@ -175,3 +175,38 @@ function exist(board, word) {
 
     return false;
 }
+function minWindow(s, t) {
+    const need = {};
+
+    for (const ch of t) {
+        need[ch] = (need[ch] || 0) + 1;
+    }
+
+    let left = 0;
+    let count = t.length;
+    let start = 0;
+    let minLen = Infinity;
+
+    for (let right = 0; right < s.length; right++) {
+        if (need[s[right]]-- > 0) {
+            count--;
+        }
+
+        while (count === 0) {
+            if (right - left + 1 < minLen) {
+                start = left;
+                minLen = right - left + 1;
+            }
+
+            if (++need[s[left]] > 0) {
+                count++;
+            }
+
+            left++;
+        }
+    }
+
+    return minLen === Infinity
+        ? ""
+        : s.substr(start, minLen);
+}
