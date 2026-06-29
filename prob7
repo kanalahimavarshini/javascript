@@ -440,3 +440,22 @@ function searchMatrix(matrix, target) {
 
     return false;
 }
+function kthSmallest(root, k) {
+    const stack = [];
+    let current = root;
+
+    while (stack.length || current) {
+        while (current) {
+            stack.push(current);
+            current = current.left;
+        }
+
+        current = stack.pop();
+
+        if (--k === 0) {
+            return current.val;
+        }
+
+        current = current.right;
+    }
+}
