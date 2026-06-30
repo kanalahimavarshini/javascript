@@ -594,3 +594,29 @@ function findCheapestPrice(n, flights, src, dst, k) {
 
     return prices[dst] === Infinity ? -1 : prices[dst];
 }
+function findItinerary(tickets) {
+    const graph = {};
+
+    for (const [from, to] of tickets) {
+        if (!graph[from]) graph[from] = [];
+        graph[from].push(to);
+    }
+
+    for (const city in graph) {
+        graph[city].sort().reverse();
+    }
+
+    const route = [];
+
+    function dfs(city) {
+        while (graph[city]?.length) {
+            dfs(graph[city].pop());
+        }
+
+        route.push(city);
+    }
+
+    dfs("JFK");
+
+    return route.reverse();
+}
