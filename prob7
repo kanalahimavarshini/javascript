@@ -754,3 +754,22 @@ function candy(ratings) {
 
     return candies.reduce((a, b) => a + b);
 }
+function leastInterval(tasks, n) {
+    const freq = {};
+
+    for (const task of tasks) {
+        freq[task] = (freq[task] || 0) + 1;
+    }
+
+    const values = Object.values(freq);
+
+    const max = Math.max(...values);
+
+    const maxCount =
+        values.filter(x => x === max).length;
+
+    return Math.max(
+        tasks.length,
+        (max - 1) * (n + 1) + maxCount
+    );
+}
