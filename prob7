@@ -620,3 +620,26 @@ function findItinerary(tickets) {
 
     return route.reverse();
 }
+function alienOrder(words) {
+    const graph = {};
+
+    for (const word of words) {
+        for (const ch of word) {
+            graph[ch] = new Set();
+        }
+    }
+
+    for (let i = 0; i < words.length - 1; i++) {
+        const a = words[i];
+        const b = words[i + 1];
+
+        for (let j = 0; j < Math.min(a.length, b.length); j++) {
+            if (a[j] !== b[j]) {
+                graph[a[j]].add(b[j]);
+                break;
+            }
+        }
+    }
+
+    return graph;
+}
