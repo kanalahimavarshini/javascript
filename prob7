@@ -873,3 +873,68 @@ function findMedianSortedArrays(nums1, nums2) {
 }
 
 console.log(findMedianSortedArrays([1, 3], [2]));
+class LFUCache {
+    constructor(capacity) {
+        this.capacity = capacity;
+        this.cache = new Map();
+        this.freq = new Map();
+    }
+
+    get(key) {
+        if (!this.cache.has(key)) {
+            return -1;
+        }
+
+        this.freq.set(
+            key,
+            this.freq.get(key) + 1
+        );
+
+        return this.cache.get(key);
+    }
+
+    put(key, value) {
+        if (this.capacity === 0) {
+            return;
+        }
+
+        if (this.cache.has(key)) {
+            this.cache.set(key, value);
+            this.freq.set(
+                key,
+                this.freq.get(key) + 1
+            );
+            return;
+        }
+
+        if (this.cache.size >= this.capacity) {
+            let minFreq = Infinity;
+            let removeKey = null;
+
+            for (const [k, f] of this.freq) {
+                if (f < minFreq) {
+                    minFreq = f;
+                    removeKey = k;
+                }
+            }
+
+            this.cache.delete(removeKey);
+            this.freq.delete(removeKey);
+        }
+
+        this.cache.set(key, value);
+        this.freq.set(key, 1);
+    }
+}
+
+const cache = new LFUCache(2);
+
+cache.put(1, 10);
+cache.put(2, 20);
+
+console.log(cache.get(1));
+
+cache.put(3, 30);
+
+console.log(cache.get(2));
+console.log(cache.get(3));
