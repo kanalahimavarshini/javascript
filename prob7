@@ -773,3 +773,35 @@ function leastInterval(tasks, n) {
         (max - 1) * (n + 1) + maxCount
     );
 }
+function maxCoins(nums) {
+    nums = [1, ...nums, 1];
+
+    const memo = {};
+
+    function solve(left, right) {
+        if (left > right) return 0;
+
+        const key = `${left},${right}`;
+
+        if (memo[key] !== undefined)
+            return memo[key];
+
+        let best = 0;
+
+        for (let i = left; i <= right; i++) {
+            best = Math.max(
+                best,
+                nums[left - 1] *
+                nums[i] *
+                nums[right + 1] +
+                solve(left, i - 1) +
+                solve(i + 1, right)
+            );
+        }
+
+        memo[key] = best;
+        return best;
+    }
+
+    return solve(1, nums.length - 2);
+}
