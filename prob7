@@ -540,3 +540,36 @@ function generateMatrix(n) {
 }
 
 console.log(generateMatrix(3));
+function networkDelayTime(times, n, k) {
+    const graph = Array.from({ length: n + 1 }, () => []);
+
+    for (const [u, v, w] of times) {
+        graph[u].push([v, w]);
+    }
+
+    const dist = Array(n + 1).fill(Infinity);
+    dist[k] = 0;
+
+    const pq = [[0, k]];
+
+    while (pq.length) {
+        pq.sort((a, b) => a[0] - b[0]);
+
+        const [cost, node] = pq.shift();
+
+        if (cost > dist[node]) continue;
+
+        for (const [next, weight] of graph[node]) {
+            const newCost = cost + weight;
+
+            if (newCost < dist[next]) {
+                dist[next] = newCost;
+                pq.push([newCost, next]);
+            }
+        }
+    }
+
+    const answer = Math.max(...dist.slice(1));
+
+    return answer === Infinity ? -1 : answer;
+}
